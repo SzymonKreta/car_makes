@@ -6,4 +6,5 @@ django-filter
 coreapi
 gunicorn
 requests
+django-heroku
 -e .
