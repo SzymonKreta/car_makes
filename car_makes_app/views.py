@@ -27,7 +27,7 @@ class CarViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         cars = list(self.queryset)
-        for car in  cars:
+        for car in cars:
             rates = [rate.rate for rate in models.Rate.objects.filter(car=car.id)]
             car.avg = sum(rates)/len(rates) if rates else 0
         return cars
@@ -39,6 +39,7 @@ class CarViewset(viewsets.ModelViewSet):
             raise ValidationError('This make does not exists at all')
         if model not in [model['Model_Name'].lower() for model in ext_api_response.json()['Results']]:
             raise ValidationError('This model does not exists at all')
+
         queryset = models.Car.objects.filter(make=make, model=model)
         if queryset.exists():
             raise ValidationError('Model exists in database')
@@ -53,7 +54,7 @@ class PopularViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         cars = list(self.queryset)
-        for car in  self.queryset:
+        for car in cars:
             car.count = len(models.Rate.objects.filter(car=car.id))
         return sorted(cars, key=lambda x: x.count, reverse=True)
 

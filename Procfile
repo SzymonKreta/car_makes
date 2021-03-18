@@ -1,1 +1,1 @@
-web: gunicorn car_makes.wsgi
+web: python manage.py collectstatic --noinput; gunicorn --workers=4 car_makes.wsgi
