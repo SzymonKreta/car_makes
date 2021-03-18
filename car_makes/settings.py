@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import django_heroku
+
 import os
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "123qwerty")
@@ -132,3 +134,5 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
+
+django_heroku.settings(locals())
