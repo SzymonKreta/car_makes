@@ -23,7 +23,6 @@ class PopularSerializer(serializers.ModelSerializer):
         )
 
 class RateSerializer(serializers.ModelSerializer):
-    #car = CarSerializer()
     class Meta:
         model = models.Rate
         fields = '__all__'
