@@ -1,0 +1,9 @@
+django
+djangorestframework
+markdown
+psycopg2
+django-filter
+coreapi
+gunicorn
+requests
+-e .
