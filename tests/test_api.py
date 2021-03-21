@@ -16,7 +16,7 @@ VALID_CARS_ADD = (
 
 
 INVALID_CARS_ADD = (
-    ({},{'make': ['This field is required.'], 'model': ['This field is required.']}),
+    ({}, {'make': ['This field is required.'], 'model': ['This field is required.']}),
     ({'make': 'Honda'}, {'model': ['This field is required.']}),
     ({'model': '500'}, {'make': ['This field is required.']}),
     ({'make': 'xyz', 'model': 'Accord'}, ['This make does not exists at all.']),
@@ -32,6 +32,7 @@ RATE_DATA = (
     (6, status.HTTP_400_BAD_REQUEST),
     (0, status.HTTP_400_BAD_REQUEST)
 )
+
 
 @pytest.fixture
 def api_client():
@@ -76,7 +77,7 @@ def test_rate_car(api_client, data, rate, status):
 @pytest.mark.django_db
 def test_get_cars(api_client):
     for car_data in VALID_CARS_ADD:
-        resp_data = test_correct_add_car(api_client,car_data)
+        resp_data = test_correct_add_car(api_client, car_data)
         for rate in range(4, 6):
             rate_data = {'car': resp_data['id'], 'rate': rate}
             resp = api_client.post(RATE_ENDPOINT, rate_data, format='json')
@@ -101,4 +102,3 @@ def test_get_popular(api_client):
                                                  'count': 5,
                                                  **{k: v.lower() for k, v in car_data.items()}})
                                     for idx, car_data in enumerate(VALID_CARS_ADD, 1)]
-

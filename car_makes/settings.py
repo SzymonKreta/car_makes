@@ -133,7 +133,7 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
-    'DEFAULT_PARSER_CLASSES': ['rest_framework.parsers.JSONParser',]
+    'DEFAULT_PARSER_CLASSES': ['rest_framework.parsers.JSONParser']
 }
 
 django_heroku.settings(locals())
