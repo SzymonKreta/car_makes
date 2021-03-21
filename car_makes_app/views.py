@@ -33,16 +33,16 @@ class CarViewset(viewsets.ModelViewSet):
         return cars
 
     def perform_create(self, serializer):
-        make, model = self.request.POST['make'].lower(), self.request.POST['model'].lower()
+        make, model = self.request.data['make'].lower(), self.request.data['model'].lower()
         ext_api_response = requests.get(f'https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{make}?format=json')
         if not ext_api_response.json()['Count']:
-            raise ValidationError('This make does not exists at all')
+            raise ValidationError('This make does not exists at all.')
         if model not in [model['Model_Name'].lower() for model in ext_api_response.json()['Results']]:
-            raise ValidationError('This model does not exists at all')
+            raise ValidationError('This model does not exists at all.')
 
         queryset = models.Car.objects.filter(make=make, model=model)
         if queryset.exists():
-            raise ValidationError('Model exists in database')
+            raise ValidationError('Model already exists in database.')
         serializer.save()
 
 

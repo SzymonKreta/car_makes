@@ -4,7 +4,7 @@ from . import models
 
 
 class CarSerializer(serializers.ModelSerializer):
-    avg = serializers.IntegerField(read_only=True)
+    avg = serializers.FloatField(read_only=True)
 
     class Meta:
         model = models.Car
